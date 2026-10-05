@@ -1,0 +1,17 @@
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent
+
+DATABASE_PATH = BASE_DIR / "data" / "network_monitor.db"
+EXPORT_DIR = BASE_DIR / "exports"
+
+
+DEFAULT_CAPTURE_DURATION = 30
+DEFAULT_PACKET_LIMIT = 500
+
+TRAFFIC_THRESHOLD = 500
+PORT_SCAN_THRESHOLD = 20
+CONNECTION_THRESHOLD = 50
+
+TIME_WINDOW_SECONDS = 60
