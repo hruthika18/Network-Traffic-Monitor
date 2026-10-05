@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 from scapy.all import sniff, IP, TCP, UDP, ICMP
 
@@ -45,7 +46,7 @@ def parse_packet(packet):
             destination_port = packet[UDP].dport
 
         return {
-            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "timestamp": datetime.now().isoformat(timespec="microseconds"),
             "source_ip": source_ip,
             "destination_ip": destination_ip,
             "protocol": get_protocol(packet),
@@ -66,10 +67,16 @@ def capture_packets(packet_limit=10):
     print(f"Starting packet capture for {packet_limit} packets...")
     print("Generate some network activity while the capture is running.")
 
+    start_time = time.time()
+
     captured_packets = sniff(
         count=packet_limit,
         store=True
     )
+
+    end_time = time.time()
+
+    capture_duration = end_time - start_time
 
     packet_data = []
 
@@ -79,7 +86,9 @@ def capture_packets(packet_limit=10):
         if parsed_packet is not None:
             packet_data.append(parsed_packet)
 
-    return packet_data
+    print(f"Capture duration: {capture_duration:.2f} seconds")
+
+    return packet_data, capture_duration
 
 
 if __name__ == "__main__":
