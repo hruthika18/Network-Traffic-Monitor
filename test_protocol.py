@@ -1,6 +1,7 @@
 from capture.packet_capture import capture_packets
 from analysis.protocol_analysis import identify_protocol, analyze_protocols
 from analysis.ip_analysis import analyze_ip_addresses, get_unique_ip_count
+from analysis.port_analysis import analyze_ports
 
 
 print("Capturing 10 packets...")
@@ -63,3 +64,36 @@ for ip_address, values in ip_statistics["destination_ips"].items():
 
 print("\nUnique IP Count:")
 print(get_unique_ip_count(packets))
+
+print("\nPort Statistics:")
+print("-" * 40)
+
+port_statistics = analyze_ports(packets)
+
+print("\nSource Ports:")
+
+for port, values in port_statistics["source_ports"].items():
+    print(
+        port,
+        "->",
+        values["service"],
+        ",",
+        values["packet_count"],
+        "packets,",
+        values["total_bytes"],
+        "bytes"
+    )
+
+print("\nDestination Ports:")
+
+for port, values in port_statistics["destination_ports"].items():
+    print(
+        port,
+        "->",
+        values["service"],
+        ",",
+        values["packet_count"],
+        "packets,",
+        values["total_bytes"],
+        "bytes"
+    )
