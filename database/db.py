@@ -201,3 +201,64 @@ def get_traffic_summary():
     connection.close()
 
     return rows
+
+def save_alerts(alerts):
+    """Save detected alerts to SQLite."""
+
+    if not alerts:
+        return
+
+    connection = get_connection()
+
+    query = """
+        INSERT INTO alerts (
+            timestamp,
+            source_ip,
+            alert_type,
+            severity,
+            description
+        )
+        VALUES (?, ?, ?, ?, ?)
+    """
+
+    values = [
+        (
+            alert["timestamp"],
+            alert.get("source_ip"),
+            alert["alert_type"],
+            alert["severity"],
+            alert["description"]
+        )
+        for alert in alerts
+    ]
+
+    try:
+        connection.executemany(query, values)
+        connection.commit()
+    finally:
+        connection.close()
+
+
+def get_alerts():
+    """Retrieve stored alerts from SQLite."""
+
+    connection = get_connection()
+
+    try:
+        cursor = connection.execute(
+            """
+            SELECT
+                id,
+                timestamp,
+                source_ip,
+                alert_type,
+                severity,
+                description
+            FROM alerts
+            ORDER BY id DESC
+            """
+        )
+
+        return cursor.fetchall()
+    finally:
+        connection.close()
