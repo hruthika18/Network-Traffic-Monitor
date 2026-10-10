@@ -11,11 +11,26 @@ from capture.packet_capture import capture_packets
 from database.db import save_packets
 
 
+from pathlib import Path
+import streamlit as st
+
+
+def load_custom_css():
+    css_path = Path(__file__).parent / "assets" / "style.css"
+
+    if css_path.exists():
+        css = css_path.read_text(encoding="utf-8")
+        st.markdown(
+            f"<style>{css}</style>",
+            unsafe_allow_html=True
+        )
+
 st.set_page_config(
     page_title="Network Traffic Monitor",
     page_icon="📡",
     layout="wide"
 )
+load_custom_css()
 
 initialize_database()
 

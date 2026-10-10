@@ -39,6 +39,8 @@ Network-Traffic-Monitor/
 │   ├── ip_analysis.py
 │   ├── port_analysis.py
 │   └── traffic_analysis.py
+├── assets/
+│   └── style.css
 ├── capture/
 │   └── packet_capture.py
 ├── dashboard/
@@ -59,6 +61,7 @@ Network-Traffic-Monitor/
 ├── test_protocol.py
 ├── .gitignore
 └── README.md
+
 ```
 
 ## Features
@@ -247,3 +250,49 @@ The system is designed to analyze packet metadata and traffic patterns. Do not u
 ## Author
 
 Developed as an educational computer science project.
+
+## Dashboard UI Design
+
+The application uses a custom-styled Streamlit interface with CSS to improve readability and presentation.
+
+The interface includes:
+
+- A light background with blue accent colors.
+- Styled metric cards for displaying network statistics.
+- Clearly visible buttons for packet capture and data export.
+- Styled tables and chart containers.
+- Sidebar navigation for switching between analysis pages.
+- Responsive spacing adjustments for smaller screens.
+
+The styling is maintained separately in `assets/style.css`, while the application logic remains in `app.py`.
+
+## Application Workflow
+
+The application follows this workflow:
+
+1. Capture packets from an available network interface.
+2. Extract relevant packet metadata.
+3. Analyze protocols, IP addresses, ports, and traffic statistics.
+4. Store packet records and traffic summaries in the SQLite database.
+5. Apply configured rules to identify selected suspicious traffic patterns.
+6. Store generated alerts for review.
+7. Display analysis results through the Streamlit dashboard.
+8. Allow users to filter available records and download supported CSV exports.
+
+## Repository Maintenance
+
+The `.gitignore` file excludes generated files and local environment data, including:
+
+- Virtual environment directories.
+- Python cache files.
+- The local SQLite database.
+- Generated CSV exports.
+- Streamlit configuration data.
+
+This keeps the repository focused on source code, configuration, tests, and documentation.
+
+## Conclusion
+
+The Network Traffic Monitoring and Analysis System demonstrates the use of Python, packet capture, data analysis, database storage, rule-based anomaly detection, and interactive visualization in a single application.
+
+The project provides a foundation for understanding network traffic monitoring and basic security analysis. Its modular structure also allows individual components to be tested, maintained, and improved independently.

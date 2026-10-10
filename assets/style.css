@@ -1,0 +1,213 @@
+/* ===== Professional Light Dashboard ===== */
+
+:root {
+    --page-bg: #f4f7fc;
+    --card-bg: #ffffff;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --heading: #172b4d;
+    --body-text: #42526b;
+    --muted: #718096;
+    --border: #e1e8f2;
+    --cyan: #0891b2;
+}
+
+/* Page background and typography */
+.stApp {
+    background: var(--page-bg);
+    color: var(--body-text);
+    font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(244, 247, 252, 0.96);
+}
+
+.block-container {
+    max-width: 1500px;
+    padding: 2rem clamp(1rem, 3vw, 2.5rem) 3rem;
+}
+
+/* Headings */
+h1,
+h2,
+h3 {
+    color: var(--heading) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.4px;
+}
+
+p,
+label {
+    color: var(--body-text);
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: #ffffff;
+    border-right: 1px solid var(--border);
+}
+
+[data-testid="stSidebar"]>div:first-child {
+    padding-top: 1.5rem;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
+    color: var(--heading) !important;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(32, 56, 85, 0.045);
+    min-width: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(32, 56, 85, 0.09);
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--muted) !important;
+    font-size: 0.9rem !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--primary) !important;
+    font-size: clamp(1.3rem, 2.5vw, 2rem) !important;
+    font-weight: 750 !important;
+    overflow-wrap: anywhere;
+}
+
+/* Make ALL Streamlit buttons clearly visible */
+.stButton>button,
+.stDownloadButton>button,
+[data-testid="stBaseButton-primary"],
+[data-testid="stBaseButton-secondary"] {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border: 1px solid #2563eb !important;
+    border-radius: 9px !important;
+    min-height: 42px;
+    padding: 0.55rem 1.1rem;
+    font-weight: 650 !important;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.15);
+    transition: background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Force the button label to remain visible */
+.stButton>button p,
+.stDownloadButton>button p,
+[data-testid="stBaseButton-primary"] p,
+[data-testid="stBaseButton-secondary"] p {
+    color: #ffffff !important;
+    font-weight: 650 !important;
+}
+
+/* Hover */
+.stButton>button:hover,
+.stDownloadButton>button:hover,
+[data-testid="stBaseButton-primary"]:hover,
+[data-testid="stBaseButton-secondary"]:hover {
+    background-color: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* Keyboard focus */
+.stButton>button:focus-visible,
+.stDownloadButton>button:focus-visible {
+    outline: 3px solid #93c5fd !important;
+    outline-offset: 3px;
+}
+
+/* Inputs and dropdowns */
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input {
+    background: #ffffff !important;
+    color: var(--heading) !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+}
+
+[data-baseweb="select"] {
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+/* Data tables */
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Chart panels */
+[data-testid="stPlotlyChart"] {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 3px 12px rgba(32, 56, 85, 0.035);
+    overflow: hidden;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+/* Alerts and messages */
+[data-testid="stAlert"] {
+    border-radius: 10px;
+}
+
+/* Divider */
+hr {
+    border-color: var(--border);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 1rem 0.8rem 2rem;
+    }
+
+    [data-testid="stMetric"] {
+        padding: 14px;
+    }
+
+    [data-testid="stPlotlyChart"] {
+        padding: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-container {
+        padding-left: 0.6rem;
+        padding-right: 0.6rem;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 1.2rem !important;
+    }
+
+    .stButton>button,
+    .stDownloadButton>button {
+        width: 100%;
+    }
+}
